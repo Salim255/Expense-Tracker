@@ -29,7 +29,7 @@ export default function App() {
            headerTinColor: 'red',
            tabBarActiveTintColor: '#DE972B',
            tabBarItemStyle: {backgroundColor: '#6B8C95'},
-    
+           
            
           // drawerStyle: {backgroundColor: "#ccc"}
         }} >
