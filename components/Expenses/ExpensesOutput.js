@@ -2,10 +2,10 @@ import { View } from "react-native-web";
 import ExpensesList from "./ExpensesList";
 import ExpensesSummary from "./ExpensesSummary";
 
-function ExpensesOutpu({ expenses }) {
+function ExpensesOutpu({ expenses, expensesPeriod }) {
   return (
     <View>
-      <ExpensesSummary />
+      <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
       <ExpensesList />
     </View>
   );
