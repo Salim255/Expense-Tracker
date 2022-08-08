@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
 
 function ExpensesList() {
-  return <FileList />;
+  return <FlatList />;
 }
 export default ExpensesList;
