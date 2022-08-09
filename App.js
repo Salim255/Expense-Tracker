@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator(); // Object with two props
 function ExpensesOverview() {
   return (
     <Bottomtab.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: GlobalStyles.colors.primary50,
         tabBarStyle: {
@@ -30,10 +30,12 @@ function ExpensesOverview() {
             icon="add"
             size={24}
             color={tintColor}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("MangeExpense");
+            }}
           />
         ),
-      }}
+      })}
     >
       <Bottomtab.Screen
         name="RecentExpenses"
