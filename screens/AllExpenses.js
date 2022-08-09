@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import ExpensesSummary from "../components/Expenses/ExpensesSummary";
+
 import ExpensesOutput from "../components/Expenses/ExpensesOutput";
 
 export default function AllExpenses({ navigation }) {
