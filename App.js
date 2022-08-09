@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+
 import AllExpenses from "./screens/AllExpenses";
 import ManageExpenses from "./screens/ManageExpenses";
 import RecentExpenses from "./screens/RecentExpenses";
@@ -8,9 +8,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
+
 import { GlobalStyles } from "./constants/styles";
+import IconButton from "./components/UI/IconButton";
 
 const Bottomtab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator(); // Object with two props
@@ -20,13 +20,19 @@ function ExpensesOverview() {
     <Bottomtab.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        headerTinColor: "white",
+        headerTintColor: GlobalStyles.colors.primary50,
         tabBarStyle: {
           backgroundColor: GlobalStyles.colors.primary500,
         },
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
-
-        // drawerStyle: {backgroundColor: "#ccc"}
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="add"
+            size={24}
+            color={tintColor}
+            onPress={() => {}}
+          />
+        ),
       }}
     >
       <Bottomtab.Screen
@@ -45,7 +51,7 @@ function ExpensesOverview() {
         component={AllExpenses}
         options={{
           title: "All Expenses",
-          tabBarLabel: "All Expenses",
+          tabBarLabel: "AllExpenses",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="calendar" color={color} size={size} />
           ),
@@ -57,7 +63,7 @@ function ExpensesOverview() {
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -73,12 +79,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
