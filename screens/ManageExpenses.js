@@ -13,11 +13,17 @@ export default function ManageExpenses({ route, navigation }) {
       title: isEditing ? "Edit Expense" : "Add Expense",
     });
   }, [navigation, isEditing]);
-  const deletExpenseHandler = () => {};
+  const deletExpenseHandler = () => {
+    navigation.goBack();
+  };
 
-  const cancelHandler = () => {};
+  const cancelHandler = () => {
+    navigation.goBack();
+  };
 
-  const confirmHandler = () => {};
+  const confirmHandler = () => {
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
