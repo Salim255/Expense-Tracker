@@ -75,14 +75,22 @@ function expensesReducer(state, action) {
       const id = new Date().toString() + Math.random().toString();
       return [{ ...action.payload, id: id }, ...state];
     case "UPDATE":
+      //1)find the index of the expense needed update
       const updatableExpenseIndex = state.findIndex(
         (expense) => expense === action.payload.id
       );
+      //2)find the expense needed update using its index
       const updatableExpense = state[updatableExpenseIndex];
-      const updatedItem = { ...updatableExpense, ...action.payload.data };
-      const updatedExpenses = [...state];
-      updatedExpenses[updatableExpenseIndex] = updatedItem;
 
+      //3)Update the expense by the data coming from action.payload
+      const updatedItem = { ...updatableExpense, ...action.payload.data };
+
+      //3)Copy the list of  expense
+      const updatedExpenses = [...state];
+
+      //4)Give the expense the new updated value
+      updatedExpenses[updatableExpenseIndex] = updatedItem;
+      //4)Return the updated list
       return updatedExpenses;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
@@ -104,7 +112,17 @@ function ExpensesContextProvider({ childern }) {
   function updateExpense({ id, expenseData }) {
     dispatch({ type: "UPDATE", payload: { id, expenseData } });
   }
-  return <ExpensesContext.Provider>{childern}</ExpensesContext.Provider>;
+  const value = {
+    expenses: expensesState,
+    addExpense: addExpense,
+    deleteExpense: deleteExpense,
+    updateExpense: updateExpense,
+  };
+  return (
+    <ExpensesContext.Provider value={value}>
+      {childern}
+    </ExpensesContext.Provider>
+  );
 }
 
 export default ExpensesContextProvider;
