@@ -1,10 +1,13 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
+import { ExpensesContext } from "../components/store/expenses-context";
 
 export default function ManageExpenses({ route, navigation }) {
+  //To get access to Context
+  const expenseCtx = useContext(ExpensesContext);
   const editedExpenseId = route.params?.expenseId;
 
   const isEditing = !!editedExpenseId; //To convert the value into booolen
@@ -13,7 +16,9 @@ export default function ManageExpenses({ route, navigation }) {
       title: isEditing ? "Edit Expense" : "Add Expense",
     });
   }, [navigation, isEditing]);
+
   const deletExpenseHandler = () => {
+    expenseCtx.deleteExpense(editedExpenseId);
     navigation.goBack();
   };
 
@@ -22,6 +27,19 @@ export default function ManageExpenses({ route, navigation }) {
   };
 
   const confirmHandler = () => {
+    if (isEditing) {
+      expenseCtx.updateExpense(editedExpenseId, {
+        title: "Test!!!!",
+        amount: 19.99,
+        date: new Date("2022-02-01"),
+      });
+    } else {
+      expenseCtx.addExpense({
+        title: "Test!!!!",
+        amount: 19.99,
+        date: new Date("2022-02-01"),
+      });
+    }
     navigation.goBack();
   };
 
@@ -32,7 +50,7 @@ export default function ManageExpenses({ route, navigation }) {
           Cancel
         </Button>
         <Button onPress={confirmHandler} style={styles.button}>
-          {isEditing ? "Update" : "Add"}{" "}
+          {isEditing ? "Update" : "Add"}
         </Button>
       </View>
       {isEditing && (

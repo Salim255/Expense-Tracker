@@ -13,7 +13,7 @@ export default function RecentExpenses() {
 
     const date7daysAgo = getDateMinusDays(today, 7);
 
-    return expense.date > date7daysAgo;
+    return expense.date >= date7daysAgo && expense.date <= today;
   });
   return (
     <ExpensesOutput expenses={recentExepenses} expensesPeriod="Last 7 Days" />

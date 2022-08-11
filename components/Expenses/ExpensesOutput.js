@@ -4,7 +4,6 @@ import ExpensesList from "./ExpensesList";
 import ExpensesSummary from "./ExpensesSummary";
 
 function ExpensesOutput({ expenses, expensesPeriod }) {
-  console.log(expenses);
   return (
     <View style={styles.container}>
       <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
