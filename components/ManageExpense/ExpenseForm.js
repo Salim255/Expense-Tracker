@@ -21,7 +21,14 @@ const ExpenseForm = () => {
           onChangeText: () => {},
         }}
       />
-      <Input label="title" textInputConfig={{}} />
+      <Input
+        label="title"
+        textInputConfig={{
+          multiline: true,
+          //autoCorrect: false, //default is true
+          //autoCapitalize: "none",
+        }}
+      />
     </View>
   );
 };
