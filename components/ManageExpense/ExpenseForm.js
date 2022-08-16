@@ -3,6 +3,7 @@ import { Form, TextInput, View, StyleSheet, Text, Alert } from "react-native";
 import Input from "./Input";
 import Button from "../UI/Button";
 import { getFormattedDate } from "../../screens/util/date";
+import { GlobalStyles } from "../../constants/styles";
 
 const ExpenseForm = ({
   onCancel,
@@ -13,7 +14,7 @@ const ExpenseForm = ({
   const [inputs, setInputs] = useState({
     amount: {
       value: defaultValues ? defaultValues.amount.toString() : "",
-      idValid: true,
+      isValid: true,
     },
     date: {
       value: defaultValues ? getFormattedDate(defaultValues.date) : "",
@@ -69,6 +70,7 @@ const ExpenseForm = ({
         <Input
           style={styles.rowInput}
           label="amount"
+          invalid={!inputs.amount.isValid}
           textInputConfig={{
             KeyboardType: "decimal-pad",
             onChangeText: inputChangeHandler.bind(this, "amount"),
@@ -78,6 +80,7 @@ const ExpenseForm = ({
         <Input
           style={styles.rowInput}
           label="date"
+          invalid={!inputs.date.isValid}
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
@@ -89,6 +92,7 @@ const ExpenseForm = ({
 
       <Input
         label="title"
+        invalid={!inputs.title.isValid}
         textInputConfig={{
           multiline: true,
           //autoCorrect: false, //default is true
@@ -98,7 +102,9 @@ const ExpenseForm = ({
         }}
       />
       {formIsInvalid && (
-        <Text>Invalid input values - please check your entered data!</Text>
+        <Text style={styles.errorText}>
+          Invalid input values - please check your entered data!
+        </Text>
       )}
       <View style={styles.buttons}>
         <Button mode="flat" onPress={onCancel} style={styles.button}>
@@ -128,6 +134,11 @@ const styles = StyleSheet.create({
   },
   rowInput: {
     flex: 1,
+  },
+  errorText: {
+    textAlign: "center",
+    color: GlobalStyles.colors.error500,
+    margin: 8,
   },
   buttons: {
     flexDirection: "row",
