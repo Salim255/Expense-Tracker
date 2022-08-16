@@ -26,26 +26,22 @@ export default function ManageExpenses({ route, navigation }) {
   const cancelHandler = () => {
     navigation.goBack();
   };
-  const confirmHandler = () => {
+  const confirmHandler = (expenseData) => {
     if (isEditing) {
-      expenseCtx.updateExpense(editedExpenseId, {
-        title: "Test!!!!",
-        amount: 19.99,
-        date: new Date("2022-02-01"),
-      });
+      expenseCtx.updateExpense(editedExpenseId, expenseData);
     } else {
-      expenseCtx.addExpense({
-        title: "Test!!!!",
-        amount: 19.99,
-        date: new Date("2022-02-01"),
-      });
+      expenseCtx.addExpense(expenseData);
     }
     navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
-      <ExpenseForm onCancel={cancelHandler} submitButtonLabel={isEditing} />
+      <ExpenseForm
+        onCancel={cancelHandler}
+        submitButtonLabel={isEditing}
+        onSubmit={confirmHandler}
+      />
 
       {isEditing && (
         <View style={styles.deletContainer}>
