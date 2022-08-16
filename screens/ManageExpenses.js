@@ -26,7 +26,6 @@ export default function ManageExpenses({ route, navigation }) {
   const cancelHandler = () => {
     navigation.goBack();
   };
-
   const confirmHandler = () => {
     if (isEditing) {
       expenseCtx.updateExpense(editedExpenseId, {
@@ -46,15 +45,8 @@ export default function ManageExpenses({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <ExpenseForm />
-      <View style={styles.buttons}>
-        <Button mode="flat" onPress={cancelHandler} style={styles.button}>
-          Cancel
-        </Button>
-        <Button onPress={confirmHandler} style={styles.button}>
-          {isEditing ? "Update" : "Add"}
-        </Button>
-      </View>
+      <ExpenseForm onCancel={cancelHandler} submitButtonLabel={isEditing} />
+
       {isEditing && (
         <View style={styles.deletContainer}>
           <IconButton
@@ -75,15 +67,7 @@ const styles = StyleSheet.create({
     padding: 24,
     backgroundColor: GlobalStyles.colors.primary800,
   },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8,
-  },
+
   deletContainer: {
     marginTop: 16,
     paddingTop: 8,
