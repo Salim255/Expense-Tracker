@@ -76,14 +76,20 @@ function expensesReducer(state, action) {
       return [{ ...action.payload, id: id }, ...state];
     case "UPDATE":
       //1)find the index of the expense needed update
+
       const updatableExpenseIndex = state.findIndex(
-        (expense) => expense === action.payload.id
+        (expense) => expense.id === action.payload.id
       );
+
       //2)find the expense needed update using its index
       const updatableExpense = state[updatableExpenseIndex];
 
       //3)Update the expense by the data coming from action.payload
-      const updatedItem = { ...updatableExpense, ...action.payload.data };
+
+      const updatedItem = {
+        ...updatableExpense,
+        ...action.payload.expenseData,
+      };
 
       //3)Copy the list of  expense
       const updatedExpenses = [...state];
@@ -109,7 +115,8 @@ function ExpensesContextProvider({ children }) {
   function deleteExpense(id) {
     dispatch({ type: "DELETE", payload: id });
   }
-  function updateExpense({ id, expenseData }) {
+  function updateExpense(id, expenseData) {
+    //console.log("DD", id);
     dispatch({ type: "UPDATE", payload: { id, expenseData } });
   }
   const value = {

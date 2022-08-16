@@ -12,6 +12,11 @@ export default function ManageExpenses({ route, navigation }) {
   const editedExpenseId = route.params?.expenseId;
 
   const isEditing = !!editedExpenseId; //To convert the value into booolen
+
+  const selectedExpense = expenseCtx.expenses.find(
+    (expense) => expense.id === editedExpenseId
+  );
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: isEditing ? "Edit Expense" : "Add Expense",
@@ -41,6 +46,7 @@ export default function ManageExpenses({ route, navigation }) {
         onCancel={cancelHandler}
         submitButtonLabel={isEditing}
         onSubmit={confirmHandler}
+        defaultValues={selectedExpense}
       />
 
       {isEditing && (
