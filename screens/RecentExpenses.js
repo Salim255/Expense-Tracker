@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import ExpensesOutput from "../components/Expenses/ExpensesOutput";
 import { ExpensesContext } from "../components/store/expenses-context";
@@ -11,6 +11,7 @@ export default function RecentExpenses() {
   useEffect(() => {
     async function getExpenses() {
       const expenses = await fetchExpenses();
+      expensesCtx.setExpenses(expenses);
     }
     getExpenses();
   }, []);
