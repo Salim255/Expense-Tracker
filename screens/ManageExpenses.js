@@ -5,6 +5,7 @@ import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
 import { ExpensesContext } from "../components/store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import { storeExpense } from "./util/http";
 
 export default function ManageExpenses({ route, navigation }) {
   //To get access to Context
@@ -35,6 +36,7 @@ export default function ManageExpenses({ route, navigation }) {
     if (isEditing) {
       expenseCtx.updateExpense(editedExpenseId, expenseData);
     } else {
+      storeExpense(expenseData);
       expenseCtx.addExpense(expenseData);
     }
     navigation.goBack();
