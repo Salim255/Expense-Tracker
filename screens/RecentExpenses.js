@@ -1,12 +1,19 @@
-import { useContext, useLayoutEffect } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { useContext, useEffect } from "react";
+
 import ExpensesOutput from "../components/Expenses/ExpensesOutput";
 import { ExpensesContext } from "../components/store/expenses-context";
 import { getDateMinusDays } from "./util/date";
+import { fetchExpenses } from "./util/http";
 
 export default function RecentExpenses() {
   const expensesCtx = useContext(ExpensesContext);
+
+  useEffect(() => {
+    async function getExpenses() {
+      const expenses = await fetchExpenses();
+    }
+    getExpenses();
+  }, []);
 
   const recentExepenses = expensesCtx.expenses.filter((expense) => {
     const today = new Date();
