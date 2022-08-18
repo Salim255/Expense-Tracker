@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
   sum: {
     fontSize: 16,
     fontWeight: "bold",
-    color: GlobalStyles.colors.primary500,
+    color: GlobalStyles.colors.primary400,
   },
 });

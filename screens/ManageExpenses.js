@@ -1,5 +1,5 @@
 import { useContext, useLayoutEffect, useState } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, ImageBackground } from "react-native";
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
@@ -74,25 +74,31 @@ export default function ManageExpenses({ route, navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <ExpenseForm
-        onCancel={cancelHandler}
-        submitButtonLabel={isEditing}
-        onSubmit={confirmHandler}
-        defaultValues={selectedExpense}
-      />
+    <ImageBackground
+      source={require("../assets/images/jp-valery-blOLCO2K4M0-unsplash.jpeg")}
+      resizeMode="cover"
+      style={styles.bgImage}
+    >
+      <View style={styles.container}>
+        <ExpenseForm
+          onCancel={cancelHandler}
+          submitButtonLabel={isEditing}
+          onSubmit={confirmHandler}
+          defaultValues={selectedExpense}
+        />
 
-      {isEditing && (
-        <View style={styles.deletContainer}>
-          <IconButton
-            icon="trash"
-            color={GlobalStyles.colors.error500}
-            size={36}
-            onPress={deletExpenseHandler}
-          />
-        </View>
-      )}
-    </View>
+        {isEditing && (
+          <View style={styles.deletContainer}>
+            <IconButton
+              icon="trash"
+              color={GlobalStyles.colors.error500}
+              size={36}
+              onPress={deletExpenseHandler}
+            />
+          </View>
+        )}
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -101,6 +107,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: GlobalStyles.colors.primary800,
+    opacity: 0.8,
+  },
+  bgImage: {
+    flex: 1,
   },
 
   deletContainer: {
